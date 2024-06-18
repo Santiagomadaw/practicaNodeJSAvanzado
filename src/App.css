@@ -1,0 +1,42 @@
+:root {
+  --primary-100: #61dafb;
+  --primary-200: #3d3d3d;
+  --primary-300: #000b0e;
+  --accent-100: #103629;
+  --accent-200: #bfffd9;
+  --text-100: #bfffd9;
+  --text-200: #103629;
+  --bg-100: #282c34;
+  --bg-200: #21c063;
+  --bg-300: #50555e;
+}
+#root {
+  height: 100vh;
+  width: 80vw;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+main {
+  height: 80vh;
+  padding: 15px 0;
+  overflow: scroll;
+}
+
+main::-webkit-scrollbar {
+  display: none;
+}
+/* Posible modo claro
+*/
+:rootLight {
+  --primary-100: #103629;
+  --primary-200: #3d3d3d;
+  --primary-300: #ffffff;
+  --accent-100: #bfffd9;
+  --accent-200: #103629;
+  --text-100: #103629;
+  --text-200: #bfffd9;
+  --bg-100: #282c34;
+  --bg-200: #21c063;
+  --bg-300: #50555e;
+}
