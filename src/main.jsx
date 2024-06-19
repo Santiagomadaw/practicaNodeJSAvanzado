@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client';
 import configureStore from './store';
 import { Provider } from 'react-redux';
 
+
 const accessToken = localStorage.getItem('auth');
 if (accessToken) {
     setAuthorizationHeader(accessToken);

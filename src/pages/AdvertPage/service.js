@@ -6,8 +6,7 @@ export const getAd = (id) => {
         response = client.get(`/api/v1/adverts/${id}`);
         return response;
     } catch (error) {
-        const msg = error.message;
-        return Promise.reject({ message: msg });
+        return Promise.reject(error);
     }
 };
 

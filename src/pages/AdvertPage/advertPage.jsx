@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
 import Button from '../../components/shared/Button';
 import ErrorMessage from '../../components/shared/ErrorMessage';
@@ -13,6 +13,8 @@ import Confirmator from '../../components/shared/Confirmator';
 
 export default function AdvertPage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const location = useLocation()
     const [hideDelete, setHideDelete] = useState(false);
     const { adId } = useParams();
     const ad = useSelector(getAdByID(adId));
@@ -22,7 +24,11 @@ export default function AdvertPage() {
         }
      
     }, [adId, ad, dispatch]);
-
+    const handleBack =() =>{
+        
+        const to = location.state?.from || '/';
+        navigate(to, { replace: true });
+    }
     const handleDeleteAd = () => {
         setHideDelete(true);
         console.log(hideDelete);
@@ -84,7 +90,7 @@ export default function AdvertPage() {
                             >
                                 Borrar
                             </Button>
-                            <Button id='backButton' $customheight='28px'>
+                            <Button id='backButton' $customheight='28px'onClick={handleBack}>
                                 Volver
                             </Button>
                         </div>
@@ -95,7 +101,7 @@ export default function AdvertPage() {
                         className='advert-loginPage-error'
 
                     >
-                        <h3>{error.toUpperCase()}</h3>
+                        <h3>{error.message.toUpperCase()}</h3>
                     </ErrorMessage>
                 )}
             </StyledAdvertPage>

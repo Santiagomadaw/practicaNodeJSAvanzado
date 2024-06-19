@@ -1,30 +1,31 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import SingleAd from './components/ad';
 import Layout from '../../components/layout/Layout';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 import Noad from './components/Noad';
 import { useDispatch, useSelector } from 'react-redux';
-import { adsLoader } from '../../store/actions';
-import { getFilters, getLoadedAds } from '../../store/selectors';
+import { adsLoader, uiResetError } from '../../store/actions';
+import { getError, getFilters, getLoadedAds } from '../../store/selectors';
 import { FilterOption } from './utils';
 
 const AdvertsPage = () => {
     const dispatch = useDispatch();
     const filter = useSelector(getFilters);
     const ads = useSelector(getLoadedAds);
-    const [error, setError] = useState(null);
-    const resetError = () => setError(null);
-
-    useEffect(() => {
-        dispatch(adsLoader());
-    }, [dispatch]);
-
+    const error = useSelector(getError);
+    const resetError = () => dispatch(uiResetError());
     let sellAds = ads;
     if (filter) {
         sellAds = FilterOption(filter, ads);
     }
+    useEffect(() => {
+        dispatch(adsLoader());
+        
+    }, [dispatch]);
+
+   
 
     return (
         <Layout>
@@ -39,7 +40,7 @@ const AdvertsPage = () => {
                         className='loginPage-error'
                         onClick={resetError}
                     >
-                        <h3>{error.toUpperCase()}</h3>
+                        <h3>{error.message.toUpperCase()}</h3>
                     </ErrorMessage>
                 )}
             </StyledAdList>

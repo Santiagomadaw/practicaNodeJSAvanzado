@@ -17,7 +17,8 @@ import { Loading } from '../../components/shared/Loading';
 export default function LoginPage() {
     const dispatch = useDispatch();
     const resetError = () => dispatch(uiResetError());
-    const errorState = useSelector(getError);
+    const error = useSelector(getError);
+    console.log('error',(error))
     const pending = useSelector(getPending);
     const [formValues, setFormValues] = useState({
         email: '',
@@ -89,9 +90,9 @@ export default function LoginPage() {
                     </Button>
                 </Form>
                 {pending && <Loading />}
-            {errorState && (
+            {error && error.message &&(
                 <ErrorMessage className='loginPage-error' onClick={resetError}>
-                    <h3>{errorState.toUpperCase()}</h3>
+                    <h3>{error.message.toUpperCase()}</h3>
                 </ErrorMessage>
             )}
             </StyledLogin>

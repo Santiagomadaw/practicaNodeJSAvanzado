@@ -1,6 +1,3 @@
-import getAds from '../pages/AdvertsPage/service';
-import { findHighestPrice } from '../pages/AdvertsPage/utils';
-import { login, logout } from '../pages/login/services';
 import {
     AUTH_LOGIN_FULFILLED,
     AUTH_LOGIN_REJECTED,
@@ -32,14 +29,11 @@ import {
     AUTH_LOGOUT_FULFILLED,
     AUTH_LOGOUT_REJECTED,
 } from './types';
-import { getAdByID, isLoadedAds, isLoadedTags } from './selectors';
-import { postAd } from '../pages/NewAdvertPage/services';
-import { deleteAd, getAd } from '../pages/AdvertPage/service';
-import getTags from '../components/layout/services';
+import { getAdByID, getLoadedAds, isLoadedAds, isLoadedTags } from './selectors';
 
 //----------------Login actions--------------
 
-export const authLogin = (credentials) => async (dispatch, _getState, { router }) => {
+export const authLogin = (credentials) => async (dispatch, _getState, { services: { login }, router }) => {
     try {
         dispatch(loginPending());
         await login(credentials);
@@ -49,7 +43,7 @@ export const authLogin = (credentials) => async (dispatch, _getState, { router }
 
     } catch (error) {
         if (error) {
-            dispatch(loginRejected(error.message));
+            dispatch(loginRejected(error));
         }
     }
 };
@@ -80,21 +74,22 @@ export const logoutRejected = (error) => ({
     payload: error,
     error: true,
 });
-export const authLogout =() => async (dispatch) =>{
+export const authLogout = () => async (dispatch, _getState, { services: { logout } }) => {
     try {
-        dispatch(logoutPending())
+        dispatch(logoutPending());
         await logout();
-        dispatch(logoutFulfilled())
-        
+        dispatch(logoutFulfilled());
+
     } catch (error) {
-        dispatch(logoutRejected(error))
-        
+        console.log(error);
+        dispatch(logoutRejected(error));
+
     }
-}
+};
 
 //----------------Ads load actions---------------
 
-export const adsLoader = () => async (dispatch, getState) => {
+export const adsLoader = () => async (dispatch, getState, { services: { getAds } }) => {
     const haveAdsLoaded = isLoadedAds(getState());
     if (!haveAdsLoaded) {
 
@@ -102,16 +97,15 @@ export const adsLoader = () => async (dispatch, getState) => {
             dispatch(adsLoadedPending());
             const rawAds = await getAds();
             dispatch(adsLoadedFulfilled(rawAds.data));
-            const maxprice = findHighestPrice(rawAds.data);
-            dispatch(updateSlider(maxprice));
-            dispatch(updateFilterPrice([0, maxprice]));
+            dispatch(setSlider());
         } catch (error) {
             if (error) {
-                const msg = error.message;
-                dispatch(adsLoadedRejected(msg));
+                console.log(error);
+                dispatch(adsLoadedRejected(error));
             }
         }
     }
+    dispatch(setSlider());
 };
 export const adsLoadedPending = () => ({
     type: ADS_LOADED_PENDING,
@@ -129,7 +123,7 @@ export const adsLoadedRejected = (error) => ({
 });
 //----------------Ad detail actions---------------
 
-export const adDetailLoader = (id) => async (dispatch, getState, { router }) => {
+export const adDetailLoader = (id) => async (dispatch, getState, { services: { getAd } }) => {
     const state = getState();
     if (!getAdByID(id)(state)) {
         try {
@@ -137,15 +131,7 @@ export const adDetailLoader = (id) => async (dispatch, getState, { router }) => 
             const ad = await getAd(id);
             dispatch(adDetailFulfilled(ad.data));
         } catch (error) {
-            if (error) {
-                const status = error.status;
-                if (status) {
-                    router.navigate('/404');
-                } else {
-                    const msg = (error).message;
-                    dispatch(adDetailRejected(msg));
-                }
-            }
+            dispatch(adDetailRejected(error));
         }
     }
 
@@ -166,23 +152,23 @@ export const adDetailRejected = (error) => ({
 });
 //----------------Ad create actions---------------
 
-export const adCreate = (formValues) => async (dispatch, _getState, { router }) => {
+export const adCreate = (formValues) => async (dispatch, _getState, { services: { postAd }, router }) => {
 
     try {
         dispatch(adCreatedPending());
         const response = await postAd(formValues);
         dispatch(adCreatedFulfilled(response.data));
-        
-            setTimeout(() => {
-                const to = `/adverts/${response.data.id}`;
-        router.navigate(to, { replace: true });
-            }, 100);
-        
+        dispatch(setSlider());
+        setTimeout(() => {
+
+            const to = `/adverts/${response.data.id}`;
+            router.navigate(to, { replace: true });
+        }, 1000);
+
 
     } catch (error) {
         if (error) {
-            const msg = error.message;
-            dispatch(adCreatedRejected(msg));
+            dispatch(adCreatedRejected(error));
         }
     }
 
@@ -206,23 +192,24 @@ export const adCreatedRejected = (error) => ({
 
 //----------------Ad delete actions---------------
 
-export const adDelete = (id) => async (dispatch, _getState, { router }) => {
-    
+export const adDelete = (id) => async (dispatch, _getState, { services: { deleteAd }, router }) => {
+
     try {
+
         dispatch(adDeletePending());
         if (id) {
             await deleteAd(id);
-            dispatch(uiSetError('Anuncio Borrado'))
+            dispatch(uiSetError('Anuncio Borrado'));
             setTimeout(() => {
                 router.navigate('/adverts');
-                dispatch(uiResetError())
+                dispatch(uiResetError());
             }, 1000);
 
             setTimeout(() => {
                 dispatch(adDeleteFulfilled(id));
-
+                dispatch(setSlider());
             }, 1200);
-            
+
         }
     } catch (error) {
         if (error) {
@@ -230,7 +217,7 @@ export const adDelete = (id) => async (dispatch, _getState, { router }) => {
             dispatch(adDeleteRejected(msg));
         }
     }
-    
+
 
 
 };
@@ -279,9 +266,17 @@ export const updateSlider = (maxPrice) => ({
     type: UPDATE_SLIDER,
     payload: maxPrice,
 });
+
+export const setSlider = () => (dispatch, getState, { findHighestPrice }) => {
+    const state = getState();
+    const ads = getLoadedAds(state);
+    const maxPrice = findHighestPrice(ads);
+    dispatch(updateSlider(maxPrice));
+    dispatch(updateFilterPrice([0, maxPrice]));
+};
 //----------------tags actions---------------
 
-export const tagsLoader = () => async (dispatch, getState) => {
+export const tagsLoader = () => async (dispatch, getState, { services: { getTags }, }) => {
     const haveTagsLoaded = isLoadedTags(getState());
     if (!haveTagsLoaded) {
 
