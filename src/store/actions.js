@@ -213,8 +213,7 @@ export const adDelete = (id) => async (dispatch, _getState, { services: { delete
         }
     } catch (error) {
         if (error) {
-            const msg = error.message;
-            dispatch(adDeleteRejected(msg));
+            dispatch(adDeleteRejected(error));
         }
     }
 
