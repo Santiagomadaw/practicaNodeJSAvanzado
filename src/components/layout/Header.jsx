@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Button from '../shared/Button';
 import Form from '../shared/Form';
-import { logout } from '../../pages/login/services';
 import Select from '../shared/Select';
 import FormField from '../shared/FormField';
 import styled from 'styled-components';
@@ -10,7 +9,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFilters, getIsLogged, getSlider, getTagsLoaded } from '../../store/selectors';
-import { clearFilters, logoutState, tagsLoader, updateFilterBuysell, updateFilterPrice, updateFilterSearch, updateFilterTags } from '../../store/actions';
+import { authLogout, clearFilters, tagsLoader, updateFilterBuysell, updateFilterPrice, updateFilterSearch, updateFilterTags } from '../../store/actions';
 import Confirmator from '../shared/Confirmator';
 
 function Header() {
@@ -26,14 +25,11 @@ function Header() {
         
     };
     useEffect(() => {
-        const getDataTags = async () => {
-            dispatch(tagsLoader())
-        };
-        getDataTags();
+            dispatch(tagsLoader())         
     }, [dispatch]);
+
     const handleLogoutConfim = async () => {
-        await logout();
-            dispatch(logoutState())
+        dispatch(authLogout())
     
 };
     

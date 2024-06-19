@@ -11,8 +11,3 @@ export const postAd = async (formvalues) => {
     }
 };
 
-export const logout = () => {
-    return Promise.resolve().then(() => {
-        localStorage.removeItem('auth');
-    });
-};

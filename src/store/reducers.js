@@ -4,7 +4,7 @@ import {
   AD_CREATED_FULFILLED,
   AD_DETAIL_FULFILLED,
   AUTH_LOGIN_FULFILLED,
-  AUTH_LOGOUT,
+  AUTH_LOGOUT_FULFILLED,
   CLEAR_FILTERS,
   UI_RESET_ERROR,
   UPDATE_FILTER_BUYSELL,
@@ -39,13 +39,13 @@ const defaultState = {
     loaded: false
   }
 };
-//----------------Login reducer--------------
+//----------------Login - logout reducer--------------
 
 export function auth(state = defaultState.auth, action) {
   switch (action.type) {
     case AUTH_LOGIN_FULFILLED:
       return true;
-    case AUTH_LOGOUT:
+    case AUTH_LOGOUT_FULFILLED:
       return false;
     default:
       return state;

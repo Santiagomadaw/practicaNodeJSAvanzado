@@ -1,11 +1,10 @@
 import getAds from '../pages/AdvertsPage/service';
 import { findHighestPrice } from '../pages/AdvertsPage/utils';
-import { login } from '../pages/login/services';
+import { login, logout } from '../pages/login/services';
 import {
     AUTH_LOGIN_FULFILLED,
     AUTH_LOGIN_REJECTED,
     AUTH_LOGIN_PENDING,
-    AUTH_LOGOUT,
     ADS_LOADED_PENDING,
     ADS_LOADED_FULFILLED,
     ADS_LOADED_REJECTED,
@@ -29,6 +28,9 @@ import {
     ADS_DELETED_FULFILLED,
     ADS_DELETED_REJECTED,
     UI_SET_ERROR,
+    AUTH_LOGOUT_PENDING,
+    AUTH_LOGOUT_FULFILLED,
+    AUTH_LOGOUT_REJECTED,
 } from './types';
 import { getAdByID, isLoadedAds, isLoadedTags } from './selectors';
 import { postAd } from '../pages/NewAdvertPage/services';
@@ -63,9 +65,32 @@ export const loginRejected = (error) => ({
     payload: error,
     error: true,
 });
-export const logoutState = () => ({
-    type: AUTH_LOGOUT,
+
+//----------------Logout actions--------------
+
+
+export const logoutPending = () => ({
+    type: AUTH_LOGOUT_PENDING,
 });
+export const logoutFulfilled = () => ({
+    type: AUTH_LOGOUT_FULFILLED,
+});
+export const logoutRejected = (error) => ({
+    type: AUTH_LOGOUT_REJECTED,
+    payload: error,
+    error: true,
+});
+export const authLogout =() => async (dispatch) =>{
+    try {
+        dispatch(logoutPending())
+        await logout();
+        dispatch(logoutFulfilled())
+        
+    } catch (error) {
+        dispatch(logoutRejected(error))
+        
+    }
+}
 
 //----------------Ads load actions---------------
 
