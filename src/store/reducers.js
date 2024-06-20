@@ -28,8 +28,7 @@ const defaultState = {
     buysell: 'all',
     price: [],
   },
-  slider:
-    [],
+  slider:  [],
   ui: {
     pending: false,
     error: null,

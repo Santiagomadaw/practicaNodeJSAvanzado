@@ -35,6 +35,7 @@ import { getAdByID, getLoadedAds, isLoadedAds, isLoadedTags } from './selectors'
 
 export const authLogin = (credentials) => async (dispatch, _getState, { services: { login }, router }) => {
     try {
+        console.log(`loginPending`)
         dispatch(loginPending());
         await login(credentials);
         dispatch(loginFulfilled());
@@ -42,9 +43,9 @@ export const authLogin = (credentials) => async (dispatch, _getState, { services
         router.navigate(to, { replace: true });
 
     } catch (error) {
-        if (error) {
+        console.log(`loginRejected`)
             dispatch(loginRejected(error));
-        }
+       
     }
 };
 
@@ -256,10 +257,7 @@ export const updateFilterPrice = (price) => ({
     payload: price,
 });
 
-export const clearFilters = (maxPrice) => ({
-    type: CLEAR_FILTERS,
-    payload: maxPrice,
-});
+
 
 export const updateSlider = (maxPrice) => ({
     type: UPDATE_SLIDER,
@@ -273,6 +271,11 @@ export const setSlider = () => (dispatch, getState, { findHighestPrice }) => {
     dispatch(updateSlider(maxPrice));
     dispatch(updateFilterPrice([0, maxPrice]));
 };
+
+export const clearFilters = (maxPrice) => ({
+    type: CLEAR_FILTERS,
+    payload: maxPrice,
+});
 //----------------tags actions---------------
 
 export const tagsLoader = () => async (dispatch, getState, { services: { getTags }, }) => {

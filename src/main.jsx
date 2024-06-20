@@ -16,6 +16,7 @@ const router = createBrowserRouter([{ path: '*', element: <App />}]);
 
 const store = configureStore({ auth: !!accessToken}, {router});
 const root = createRoot(document.getElementById('root'));
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>
