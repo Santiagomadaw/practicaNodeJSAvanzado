@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Form from '../../components/shared/Form';
-import Layout from '../../components/layout/Layout';
 import FormField from '../../components/shared/FormField';
 import RawSwitch from '../../components/shared/Switch';
 import styled from 'styled-components';
@@ -18,7 +17,6 @@ export default function LoginPage() {
     const dispatch = useDispatch();
     const resetError = () => dispatch(uiResetError());
     const error = useSelector(getError);
-    console.log('error',(error))
     const pending = useSelector(getPending);
     const [formValues, setFormValues] = useState({
         email: '',
@@ -53,7 +51,6 @@ export default function LoginPage() {
     const { email, password } = formValues;
     const buttonDisabled = !email || !password;
     return (
-        <Layout>
             <StyledLogin className='loginPage'>
                 <h1 className='loginPage-title'>Login</h1>
                 <Form id='login-form' $variant='column' $customwidth='100%'>
@@ -61,6 +58,7 @@ export default function LoginPage() {
                         $customheight='38px'
                         $customwidth='100%'
                         type='text'
+                        role="email"
                         name='email'
                         id='email'
                         onChange={handleChange}
@@ -68,6 +66,7 @@ export default function LoginPage() {
                     <FormField
                         $customheight='38px'
                         $customwidth='100%'
+                        role="password"
                         type='password'
                         name='password'
                         id='password'
@@ -82,6 +81,7 @@ export default function LoginPage() {
                     <Button
                         type='submit'
                         disabled={buttonDisabled}
+                        role="button"
                         className='loginButton'
                         onClick={handleSubmit}
                         $customwidth='100%'
@@ -97,7 +97,6 @@ export default function LoginPage() {
             )}
             </StyledLogin>
             
-        </Layout>
     );
 }
 const StyledLogin = styled.div`

@@ -6,6 +6,7 @@ import Select from '../shared/Select';
 import FormField from '../shared/FormField';
 import styled from 'styled-components';
 import Slider from 'rc-slider';
+
 import 'rc-slider/assets/index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import Layout from '../../components/layout/Layout';
 import Button from '../../components/shared/Button';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 import styled from 'styled-components';
@@ -31,7 +30,6 @@ export default function AdvertPage() {
     }
     const handleDeleteAd = () => {
         setHideDelete(true);
-        console.log(hideDelete);
     };
     const error = useSelector(getError)
 
@@ -44,7 +42,7 @@ export default function AdvertPage() {
     
 
     return (
-        <Layout>
+        <>
             <Confirmator
                 textValue='Seguro que desea borrar?'
                 onConfirm={handleDeleteConfirm}
@@ -105,7 +103,7 @@ export default function AdvertPage() {
                     </ErrorMessage>
                 )}
             </StyledAdvertPage>
-        </Layout>
+        </>
     );
 }
 

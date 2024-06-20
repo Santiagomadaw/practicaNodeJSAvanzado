@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
 const Switch = styled.div`
     display: flex;
     flex-direction: row;

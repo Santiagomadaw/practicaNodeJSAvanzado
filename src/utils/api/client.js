@@ -17,11 +17,10 @@ client.interceptors.response.use(
             //Server error
             return Promise.reject({
                 message: error.response.statusText,
-                ...error.response,
-                ...error.response.data,
+                status: error.response.status,
             });
         }
         // Request error
-        return Promise.reject({ message: error.message });
+        return Promise.reject( { message: error.message, status: 'ERROR' });
     },
 );

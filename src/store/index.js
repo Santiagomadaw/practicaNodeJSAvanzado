@@ -19,6 +19,7 @@ const failureRedirects = (router, pathMap) => store =>next => action =>{
         if (!action.error) {
           return result;
         }
+        
         const redirect = pathMap[action.payload.status];
         if (redirect) {
           router.navigate(redirect);
@@ -38,6 +39,7 @@ export default function configureStore(preloadedState, { router }) {
         failureRedirects(router, {
           401: '/login',
           404: '/404',
+          ERROR: '/error',
         }),
       ),
     ),

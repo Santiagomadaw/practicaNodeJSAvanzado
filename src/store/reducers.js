@@ -16,7 +16,7 @@ import {
 } from './types';
 
 
-const defaultState = {
+export const defaultState = {
   auth: false,
   ads: {
     loaded: false,
@@ -127,7 +127,6 @@ export function ui(state = defaultState.ui, action) {
     return { ...state, pending: false, error: action.payload };
   }
   if (action.type === UI_RESET_ERROR) {
-    console.log(action.type)
     return { ...state, error: null };
   }
   if (action.type.endsWith('/pending')) {

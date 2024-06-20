@@ -18,8 +18,7 @@ export const login = async (formvalues) => {
             localStorage.setItem('auth', accessToken);
         }
     } catch (error) {
-        const msg = error.message;
-        return Promise.reject({ message: msg });
+        return Promise.reject(error);
     }
 };
 

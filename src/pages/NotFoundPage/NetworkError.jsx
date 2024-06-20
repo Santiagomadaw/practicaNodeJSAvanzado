@@ -1,25 +1,25 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { getError } from '../../store/selectors';
 
-export default function NotFoundPage() {
-    
+export default function NetworkError() {
+    const error = useSelector(getError)
     return (
-       
-            <StyledNotFound>
+            <StyledNetworkError>
                 <Link
                     className='notfound'
                     to='/adverts'
                 >
-                    <h1>404</h1>
+                    <h1>{error.status}</h1>
                     <hr></hr>
-                    <h3>Not Found</h3>
+                    <h3>{error.message}</h3>
                 </Link>
-            </StyledNotFound>
-        
+            </StyledNetworkError>
     );
 }
 
-const StyledNotFound = styled.div`
+const StyledNetworkError = styled.div`
 
 display: flex;
 

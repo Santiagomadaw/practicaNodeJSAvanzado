@@ -35,7 +35,6 @@ import { getAdByID, getLoadedAds, isLoadedAds, isLoadedTags } from './selectors'
 
 export const authLogin = (credentials) => async (dispatch, _getState, { services: { login }, router }) => {
     try {
-        console.log(`loginPending`)
         dispatch(loginPending());
         await login(credentials);
         dispatch(loginFulfilled());
@@ -43,7 +42,6 @@ export const authLogin = (credentials) => async (dispatch, _getState, { services
         router.navigate(to, { replace: true });
 
     } catch (error) {
-        console.log(`loginRejected`)
             dispatch(loginRejected(error));
        
     }
@@ -82,7 +80,6 @@ export const authLogout = () => async (dispatch, _getState, { services: { logout
         dispatch(logoutFulfilled());
 
     } catch (error) {
-        console.log(error);
         dispatch(logoutRejected(error));
 
     }
@@ -101,7 +98,6 @@ export const adsLoader = () => async (dispatch, getState, { services: { getAds }
             dispatch(setSlider());
         } catch (error) {
             if (error) {
-                console.log(error);
                 dispatch(adsLoadedRejected(error));
             }
         }
@@ -156,9 +152,12 @@ export const adDetailRejected = (error) => ({
 export const adCreate = (formValues) => async (dispatch, _getState, { services: { postAd }, router }) => {
 
     try {
+
         dispatch(adCreatedPending());
         const response = await postAd(formValues);
+
         dispatch(adCreatedFulfilled(response.data));
+
         dispatch(setSlider());
         setTimeout(() => {
 
@@ -200,7 +199,7 @@ export const adDelete = (id) => async (dispatch, _getState, { services: { delete
         dispatch(adDeletePending());
         if (id) {
             await deleteAd(id);
-            dispatch(uiSetError('Anuncio Borrado'));
+            dispatch(uiSetError({message:'Anuncio Borrado'}));
             setTimeout(() => {
                 router.navigate('/adverts');
                 dispatch(uiResetError());
@@ -290,7 +289,7 @@ export const tagsLoader = () => async (dispatch, getState, { services: { getTags
 
         } catch (error) {
             if (error) {
-                dispatch(tagsLoaderRejected(error.message));
+                dispatch(tagsLoaderRejected(error));
             }
         }
     }

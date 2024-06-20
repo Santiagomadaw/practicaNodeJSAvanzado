@@ -10,6 +10,13 @@ export const getAd = (id) => {
     }
 };
 
-export const deleteAd = (id) => {
-    return client.delete(`/api/v1/adverts/${id}`);
+export const deleteAd = async (id) => {
+    let response = null;
+
+    try {
+        response =  await client.delete(`/api/v1/adverts/${id}`);
+        return response;
+    } catch (error) {
+        return Promise.reject(error);
+    }
 };

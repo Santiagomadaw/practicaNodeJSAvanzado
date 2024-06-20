@@ -85,7 +85,7 @@ export default function NewAdvertPage() {
         getDataTags();
     }, [dispatch]);
     return (
-        <Layout>
+        
             <section className='new-ad-contianer'>
                 <Form
                     id='ad-form'
@@ -183,6 +183,6 @@ export default function NewAdvertPage() {
                     )}
                 </Form>
             </section>
-        </Layout>
+        
     );
 }

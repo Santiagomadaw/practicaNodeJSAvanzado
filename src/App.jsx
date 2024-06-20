@@ -4,16 +4,18 @@ import RequireAuth from './components/auth/requireAuth';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { Suspense, lazy } from 'react';
 import { Loading } from './components/shared/Loading';
+import NetworkError from './pages/NotFoundPage/NetworkError';
+import Layout from './components/layout/Layout';
 const LoginPage = lazy(() => import('./pages/login/LoginPage'));
 const AdvertsPage = lazy(() => import('./pages/AdvertsPage/advertsPage'));
 const NewAdvertPage = lazy(() => import('./pages/NewAdvertPage/NewAdvertPage'));
 const AdvertPage = lazy(() => import('./pages/AdvertPage/advertPage'));
-
 function App() {
     return (
-        
         <Suspense fallback={<Loading />}>
             <>
+            <Layout>
+            
                 <Routes>
                     <Route
                         path='/login'
@@ -51,10 +53,15 @@ function App() {
                         element={<NotFoundPage />}
                     />
                     <Route
+                        path='/error'
+                        element={<NetworkError />}
+                    />
+                    <Route
                         path='*'
                         element={<Navigate to='/404' />}
                     />
                 </Routes>
+                </Layout>
             </>
         </Suspense>
     );

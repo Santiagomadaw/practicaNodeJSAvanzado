@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import SingleAd from './components/ad';
-import Layout from '../../components/layout/Layout';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 import Noad from './components/Noad';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +27,6 @@ const AdvertsPage = () => {
    
 
     return (
-        <Layout>
             <StyledAdList className='ad-list'>
                 {sellAds.length > 0 ? (
                     sellAds.map((ad, index) => <SingleAd key={index} {...ad} />)
@@ -44,7 +42,6 @@ const AdvertsPage = () => {
                     </ErrorMessage>
                 )}
             </StyledAdList>
-        </Layout>
     );
 };
 
