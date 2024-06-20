@@ -99,6 +99,7 @@ export default function NewAdvertPage() {
                         type='text'
                         name='name'
                         id='name'
+                        role='name'
                         $customwidth='100%'
                         onChange={handleChange}
                         required
@@ -110,6 +111,7 @@ export default function NewAdvertPage() {
                         type='number'
                         step='0.01'
                         name='price'
+                        role='price'
                         id='price'
                         $customwidth='100%'
                         onChange={handleChange}
@@ -120,6 +122,7 @@ export default function NewAdvertPage() {
                     </label>
                     <Select
                         name='tags'
+                        role='tags'
                         id='tags'
                         $customwidth='100%'
                         $customheight='inered'
@@ -141,7 +144,7 @@ export default function NewAdvertPage() {
                         <h4>Foto:</h4>
                     </label>
                     <input
-                        type='file'
+                        type='file' 
                         name='photo'
                         id='photo'
                         onChange={handleFileUpload}
@@ -149,6 +152,8 @@ export default function NewAdvertPage() {
                     />
                     <RawSwitch
                         Name='sale'
+
+                        role='sale'
                         Leftname='Compra'
                         Rightname='Venta'
                         checked={sale}
@@ -157,6 +162,7 @@ export default function NewAdvertPage() {
                     <div className='buttonWrapper'>
                         <Button
                             type='button'
+                            role='buttonBack'
                             className='backButton'
                             $customwidth='50%'
                             onClick={handleBack}
@@ -165,6 +171,7 @@ export default function NewAdvertPage() {
                         </Button>
                         <Button
                             type='submit'
+                            role='buttonSubmit'
                             disabled={buttonDisabled}
                             className='newAdButton'
                             $customwidth='50%'

@@ -4,7 +4,14 @@ import { useSelector } from 'react-redux';
 import { getError } from '../../store/selectors';
 
 export default function NetworkError() {
-    const error = useSelector(getError)
+    let error = useSelector(getError)
+    
+    if (!error){
+        error={
+            status:'ERROR',
+            message:'YOU MUST NOT BE HERE'
+        }
+    }
     return (
             <StyledNetworkError>
                 <Link
