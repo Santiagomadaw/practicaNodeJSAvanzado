@@ -42,8 +42,8 @@ export const authLogin = (credentials) => async (dispatch, _getState, { services
         router.navigate(to, { replace: true });
 
     } catch (error) {
-            dispatch(loginRejected(error));
-       
+        dispatch(loginRejected(error));
+
     }
 };
 
@@ -199,7 +199,7 @@ export const adDelete = (id) => async (dispatch, _getState, { services: { delete
         dispatch(adDeletePending());
         if (id) {
             await deleteAd(id);
-            dispatch(uiSetError({message:'Anuncio Borrado'}));
+            dispatch(uiSetError({ message: 'Anuncio Borrado' }));
             setTimeout(() => {
                 router.navigate('/adverts');
                 dispatch(uiResetError());

@@ -5,40 +5,31 @@ import noImg from '../../../assets/no-image-svgrepo-com.svg';
 
 export default function SingleAd({ id, photo, name, price, sale, tags }) {
     return (
-        <Link
-            className='add'
-            to={`/adverts/${id}`}
-        >
+        <Link className='add' to={`/adverts/${id}`}>
             <StyledSingleAd className='single-ad'>
                 <div className='img-container'>
                     {photo ? (
-                        <img
-                            src={photo}
-                            alt={'Imagen de'+ name}
-                        />
+                        <img src={photo} alt={'Imagen de' + name} />
                     ) : (
-                        <img className='noImg'
+                        <img
+                            className='noImg'
                             src={noImg}
                             alt='Articulo sin foto'
                         />
                     )}
                 </div>
-                <div className="textcontainer">
-                <strong className=''>{price} €</strong>
-                <p className='item'>{name}</p>
-                <p className='task sell'>{sale ? 'Venta' : 'Compra'}</p>
-                <div className='tags-container'>
-                    {tags.map((tag, index) => (
-                        <div
-                            key={index}
-                            className='task'
-                        >
-                            {tag}
-                        </div>
-                    ))}
+                <div className='textcontainer'>
+                    <strong className=''>{price} €</strong>
+                    <p className='item'>{name}</p>
+                    <p className='task sell'>{sale ? 'Venta' : 'Compra'}</p>
+                    <div className='tags-container'>
+                        {tags.map((tag, index) => (
+                            <div key={index} className='task'>
+                                {tag}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-                </div>
-                
             </StyledSingleAd>
         </Link>
     );
@@ -50,11 +41,10 @@ SingleAd.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     sale: PropTypes.bool.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const StyledSingleAd = styled.div`
-
     box-shadow: 0px 0px 9px 4px rgba(0, 0, 0, 0.75);
     display: flex;
     flex-direction: column;
@@ -74,7 +64,6 @@ const StyledSingleAd = styled.div`
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        
     }
     & .img-container {
         display: flex;
@@ -90,24 +79,22 @@ const StyledSingleAd = styled.div`
             width: 40%;
             height: 40%;
             object-fit: cover;
-            
         }
         & img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        & .noImg{
+        & .noImg {
             opacity: 0.6;
         }
     }
-    & .textcontainer{
-        display:flex;
+    & .textcontainer {
+        display: flex;
         flex-direction: column;
         gap: 4px;
         padding-left: 10px;
         padding-right: 10px;
-        
     }
 
     & strong {

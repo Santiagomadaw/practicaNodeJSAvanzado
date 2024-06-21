@@ -6,7 +6,7 @@ export const postAd = async (formvalues) => {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
     } catch (error) {
-        return Promise.reject( error );
+        return Promise.reject(error);
     }
 };
 

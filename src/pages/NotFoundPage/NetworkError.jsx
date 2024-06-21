@@ -4,25 +4,22 @@ import { useSelector } from 'react-redux';
 import { getError } from '../../store/selectors';
 
 export default function NetworkError() {
-    let error = useSelector(getError)
-    
-    if (!error){
-        error={
-            status:'ERROR',
-            message:'YOU MUST NOT BE HERE'
-        }
+    let error = useSelector(getError);
+
+    if (!error) {
+        error = {
+            status: 'ERROR',
+            message: 'YOU MUST NOT BE HERE',
+        };
     }
     return (
-            <StyledNetworkError>
-                <Link
-                    className='notfound'
-                    to='/adverts'
-                >
-                    <h1>{error.status}</h1>
-                    <hr></hr>
-                    <h3>{error.message}</h3>
-                </Link>
-            </StyledNetworkError>
+        <StyledNetworkError>
+            <Link className='notfound' to='/adverts'>
+                <h1>{error.status}</h1>
+                <hr></hr>
+                <h3>{error.message}</h3>
+            </Link>
+        </StyledNetworkError>
     );
 }
 

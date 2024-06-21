@@ -12,8 +12,8 @@ import Confirmator from '../../components/shared/Confirmator';
 
 export default function AdvertPage() {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const location = useLocation()
+    const navigate = useNavigate();
+    const location = useLocation();
     const [hideDelete, setHideDelete] = useState(false);
     const { adId } = useParams();
     const ad = useSelector(getAdByID(adId));
@@ -21,33 +21,27 @@ export default function AdvertPage() {
         if (!ad) {
             dispatch(adDetailLoader(adId));
         }
-     
     }, [adId, ad, dispatch]);
-    const handleBack =() =>{
-        
+    const handleBack = () => {
         const to = location.state?.from || '/';
         navigate(to, { replace: true });
-    }
+    };
     const handleDeleteAd = () => {
         setHideDelete(true);
     };
-    const error = useSelector(getError)
+    const error = useSelector(getError);
 
     const handleDeleteConfirm = async () => {
-        dispatch(adDelete(adId))
-        ;
-
+        dispatch(adDelete(adId));
     };
-
-    
 
     return (
         <>
             <Confirmator
                 textValue='Seguro que desea borrar?'
                 onConfirm={handleDeleteConfirm}
-                hidden ={hideDelete}
-                sethiden ={setHideDelete}
+                hidden={hideDelete}
+                sethiden={setHideDelete}
             />
             <StyledAdvertPage className='advert'>
                 {ad && (
@@ -88,17 +82,18 @@ export default function AdvertPage() {
                             >
                                 Borrar
                             </Button>
-                            <Button id='backButton' $customheight='28px'onClick={handleBack}>
+                            <Button
+                                id='backButton'
+                                $customheight='28px'
+                                onClick={handleBack}
+                            >
                                 Volver
                             </Button>
                         </div>
                     </>
                 )}
                 {error && (
-                    <ErrorMessage
-                        className='advert-loginPage-error'
-
-                    >
+                    <ErrorMessage className='advert-loginPage-error'>
                         <h3>{error.message.toUpperCase()}</h3>
                     </ErrorMessage>
                 )}

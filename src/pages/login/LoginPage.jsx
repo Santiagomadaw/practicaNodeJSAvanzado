@@ -6,10 +6,7 @@ import styled from 'styled-components';
 import ErrorMessage from '../../components/shared/ErrorMessage';
 import Button from '../../components/shared/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    authLogin,
-    uiResetError,
-} from '../../store/actions';
+import { authLogin, uiResetError } from '../../store/actions';
 import { getError, getPending } from '../../store/selectors';
 import { Loading } from '../../components/shared/Loading';
 
@@ -43,60 +40,57 @@ export default function LoginPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        dispatch(authLogin(formValues))
-       
-        
+        dispatch(authLogin(formValues));
     };
 
     const { email, password } = formValues;
     const buttonDisabled = !email || !password;
     return (
-            <StyledLogin className='loginPage'>
-                <h1 className='loginPage-title'>Login</h1>
-                <Form id='login-form' $variant='column' $customwidth='100%'>
-                    <FormField
-                        $customheight='38px'
-                        $customwidth='100%'
-                        type='text'
-                        role="email"
-                        name='email'
-                        id='email'
-                        onChange={handleChange}
-                    />
-                    <FormField
-                        $customheight='38px'
-                        $customwidth='100%'
-                        role="password"
-                        type='password'
-                        name='password'
-                        id='password'
-                        onChange={handleChange}
-                    />
-                    <RawSwitch
-                        Name='save'
-                        checked={true}
-                        onChange={handleSwitchChange}
-                        Rightname='Guardar'
-                    />
-                    <Button
-                        type='submit'
-                        disabled={buttonDisabled}
-                        role="button"
-                        className='loginButton'
-                        onClick={handleSubmit}
-                        $customwidth='100%'
-                    >
-                        Login
-                    </Button>
-                </Form>
-                {pending && <Loading />}
-            {error && error.message &&(
+        <StyledLogin className='loginPage'>
+            <h1 className='loginPage-title'>Login</h1>
+            <Form id='login-form' $variant='column' $customwidth='100%'>
+                <FormField
+                    $customheight='38px'
+                    $customwidth='100%'
+                    type='text'
+                    role='email'
+                    name='email'
+                    id='email'
+                    onChange={handleChange}
+                />
+                <FormField
+                    $customheight='38px'
+                    $customwidth='100%'
+                    role='password'
+                    type='password'
+                    name='password'
+                    id='password'
+                    onChange={handleChange}
+                />
+                <RawSwitch
+                    Name='save'
+                    checked={true}
+                    onChange={handleSwitchChange}
+                    Rightname='Guardar'
+                />
+                <Button
+                    type='submit'
+                    disabled={buttonDisabled}
+                    role='button'
+                    className='loginButton'
+                    onClick={handleSubmit}
+                    $customwidth='100%'
+                >
+                    Login
+                </Button>
+            </Form>
+            {pending && <Loading />}
+            {error && error.message && (
                 <ErrorMessage className='loginPage-error' onClick={resetError}>
                     <h3>{error.message.toUpperCase()}</h3>
                 </ErrorMessage>
             )}
-            </StyledLogin>
-            
+        </StyledLogin>
     );
 }
 const StyledLogin = styled.div`

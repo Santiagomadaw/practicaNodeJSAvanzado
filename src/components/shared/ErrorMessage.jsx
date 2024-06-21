@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const ErrorMessage = styled.div`
     display: flex;
     align-items: center;
-    margin:auto;
+    margin: auto;
     justify-content: center;
     position: fixed;
     bottom: 100px;

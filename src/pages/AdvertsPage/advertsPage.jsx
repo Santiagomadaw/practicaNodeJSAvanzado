@@ -21,27 +21,21 @@ const AdvertsPage = () => {
     }
     useEffect(() => {
         dispatch(adsLoader());
-        
     }, [dispatch]);
 
-   
-
     return (
-            <StyledAdList className='ad-list'>
-                {sellAds.length > 0 ? (
-                    sellAds.map((ad, index) => <SingleAd key={index} {...ad} />)
-                ) : (
-                    <Noad />
-                )}
-                {error && (
-                    <ErrorMessage
-                        className='loginPage-error'
-                        onClick={resetError}
-                    >
-                        <h3>{error.message.toUpperCase()}</h3>
-                    </ErrorMessage>
-                )}
-            </StyledAdList>
+        <StyledAdList className='ad-list'>
+            {sellAds.length > 0 ? (
+                sellAds.map((ad, index) => <SingleAd key={index} {...ad} />)
+            ) : (
+                <Noad />
+            )}
+            {error && (
+                <ErrorMessage className='loginPage-error' onClick={resetError}>
+                    <h3>{error.message.toUpperCase()}</h3>
+                </ErrorMessage>
+            )}
+        </StyledAdList>
     );
 };
 

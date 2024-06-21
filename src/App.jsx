@@ -14,53 +14,28 @@ function App() {
     return (
         <Suspense fallback={<Loading />}>
             <>
-            <Layout>
-            
-                <Routes>
-                    <Route
-                        path='/login'
-                        element={<LoginPage />}
-                    />
-                    <Route
-                        path='/adverts'
-                        element={
-                            <RequireAuth>
-                                <div className='container'>
-                                    <Outlet />
-                                </div>
-                            </RequireAuth>
-                        }
-                    >
+                <Layout>
+                    <Routes>
+                        <Route path='/login' element={<LoginPage />} />
                         <Route
-                            index
-                            element={<AdvertsPage />}
-                        />
-                        <Route
-                            path=':adId'
-                            element={<AdvertPage />}
-                        />
-                        <Route
-                            path='new'
-                            element={<NewAdvertPage />}
-                        />
-                    </Route>
-                    <Route
-                        path='/'
-                        element={<Navigate to='/adverts' />}
-                    />
-                    <Route
-                        path='/404'
-                        element={<NotFoundPage />}
-                    />
-                    <Route
-                        path='/error'
-                        element={<NetworkError />}
-                    />
-                    <Route
-                        path='*'
-                        element={<Navigate to='/404' />}
-                    />
-                </Routes>
+                            path='/adverts'
+                            element={
+                                <RequireAuth>
+                                    <div className='container'>
+                                        <Outlet />
+                                    </div>
+                                </RequireAuth>
+                            }
+                        >
+                            <Route index element={<AdvertsPage />} />
+                            <Route path=':adId' element={<AdvertPage />} />
+                            <Route path='new' element={<NewAdvertPage />} />
+                        </Route>
+                        <Route path='/' element={<Navigate to='/adverts' />} />
+                        <Route path='/404' element={<NotFoundPage />} />
+                        <Route path='/error' element={<NetworkError />} />
+                        <Route path='*' element={<Navigate to='/404' />} />
+                    </Routes>
                 </Layout>
             </>
         </Suspense>

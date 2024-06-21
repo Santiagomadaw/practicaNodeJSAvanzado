@@ -10,7 +10,7 @@ const Button = styled.button`
     text-align: center;
     display: inline-block;
     font-size: 16px;
-    height:  'fit-content';
+    height: 'fit-content';
     width: ${(props) => props.$customwidth || 'fit-content'};
     &:hover {
         transform: scale(0.96);
@@ -24,7 +24,5 @@ const Button = styled.button`
         border: 1px solid var(--accent-100);
     }
 `;
-
-
 
 export default Button;

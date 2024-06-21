@@ -3,39 +3,30 @@ import Button from './Button';
 import PropTypes from 'prop-types';
 
 const Confirmator = ({ textValue, onConfirm, sethiden, hidden }) => {
-
     const handleAccept = () => {
         onConfirm();
-        sethiden(false)
+        sethiden(false);
     };
 
     const handleCancel = () => sethiden(false);
 
-    return hidden &&(
-        <StyledConfirm >
-            <div
-                className='blurer'
-            ></div>
-            <div
-                className='confirmator'
-            >
-                <h2>Seguro que desea {textValue}</h2>
-                <div className='buttonWrapper'>
-                    <Button
-                        onClick={handleAccept}
-                        $customheight='25px'
-                    >
-                        Si
-                    </Button>
-                    <Button
-                        onClick={handleCancel}
-                        $customheight='25px'
-                    >
-                        No
-                    </Button>
+    return (
+        hidden && (
+            <StyledConfirm>
+                <div className='blurer'></div>
+                <div className='confirmator'>
+                    <h2>Seguro que desea {textValue}</h2>
+                    <div className='buttonWrapper'>
+                        <Button onClick={handleAccept} $customheight='25px'>
+                            Si
+                        </Button>
+                        <Button onClick={handleCancel} $customheight='25px'>
+                            No
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        </StyledConfirm>
+            </StyledConfirm>
+        )
     );
 };
 
@@ -45,7 +36,7 @@ Confirmator.propTypes = {
     onConfirm: PropTypes.func.isRequired,
     sethiden: PropTypes.func.isRequired,
     hidden: PropTypes.bool.isRequired,
-  };
+};
 const StyledConfirm = styled.div`
     .blurer {
         position: absolute;

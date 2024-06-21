@@ -10,5 +10,4 @@ const FormField = styled.input`
     width: ${(props) => props.$customwidth || 'fit-content'};
 `;
 
-
 export default FormField;

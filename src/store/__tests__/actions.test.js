@@ -75,7 +75,7 @@ describe('authLogin action', () => {
     expect(router.navigate).toHaveBeenCalledWith(redirectUrl, {
       replace: true,
     });
-    jest.resetAllMocks()
+    jest.resetAllMocks();
   });
 
   test('Login ReJected', async () => {
@@ -88,16 +88,16 @@ describe('authLogin action', () => {
     expect(services.login).toHaveBeenCalledWith(credentials);
     expect(dispatch).toHaveBeenNthCalledWith(2, loginRejected(error));
     expect(router.navigate).not.toHaveBeenCalled();
-    
+
   });
-  jest.resetAllMocks()
+  jest.resetAllMocks();
 });
 
 describe('authLogout action', () => {
   const action = authLogout();
   const dispatch = jest.fn();
   const services = { logout: {} };
-  
+
 
   test('Logout Succesfull', async () => {
 
@@ -107,9 +107,9 @@ describe('authLogout action', () => {
     expect(dispatch).toHaveBeenNthCalledWith(1, logoutPending());
     expect(services.logout).toHaveBeenCalledWith();
     expect(dispatch).toHaveBeenNthCalledWith(2, logoutFulfilled());
-    
 
-    jest.resetAllMocks()
+
+    jest.resetAllMocks();
   });
 
   test('Logout ReJected', async () => {
@@ -121,7 +121,7 @@ describe('authLogout action', () => {
     expect(dispatch).toHaveBeenNthCalledWith(1, logoutPending());
     expect(services.logout).toHaveBeenCalledWith();
     expect(dispatch).toHaveBeenNthCalledWith(2, logoutRejected(error));
-    
+
   });
-  jest.resetAllMocks()
+  jest.resetAllMocks();
 });

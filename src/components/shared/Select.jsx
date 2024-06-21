@@ -21,6 +21,4 @@ const Select = styled.select`
     }
 `;
 
-
-
 export default Select;

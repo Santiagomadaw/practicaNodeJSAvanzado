@@ -78,7 +78,12 @@ const Switch = styled.div`
     }
 `;
 
-const RawSwitch = ({ onChange, Leftname = '', Rightname = '', Name = 'switch' }) => {
+const RawSwitch = ({
+    onChange,
+    Leftname = '',
+    Rightname = '',
+    Name = 'switch',
+}) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const handleInputChange = (event) => {

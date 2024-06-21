@@ -2,20 +2,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function NotFoundPage() {
-    
     return (
-       
-            <StyledNotFound>
-                <Link
-                    className='notfound'
-                    to='/adverts'
-                >
-                    <h1>404</h1>
-                    <hr></hr>
-                    <h3>Not Found</h3>
-                </Link>
-            </StyledNotFound>
-        
+        <StyledNotFound>
+            <Link className='notfound' to='/adverts'>
+                <h1>404</h1>
+                <hr></hr>
+                <h3>Not Found</h3>
+            </Link>
+        </StyledNotFound>
     );
 }
 

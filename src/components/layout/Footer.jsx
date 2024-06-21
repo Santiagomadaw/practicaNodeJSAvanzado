@@ -8,7 +8,6 @@ function Footer() {
     );
 }
 
-
 export default Footer;
 
 const StyledFooter = styled.footer`

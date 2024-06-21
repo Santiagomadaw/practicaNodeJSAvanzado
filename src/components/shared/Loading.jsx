@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export function Loading() {
     return (
-        <StyledLoading className="lds-grid">
+        <StyledLoading className='lds-grid'>
             <div></div>
             <div></div>
             <div></div>
@@ -82,7 +82,8 @@ const StyledLoading = styled.div`
     }
 
     @keyframes lds-grid {
-        0%, 100% {
+        0%,
+        100% {
             opacity: 1;
         }
         50% {

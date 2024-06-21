@@ -1,4 +1,4 @@
-export const FilterOption = (filtersState,ads) => {
+export const FilterOption = (filtersState, ads) => {
     let filteredAds = ads;
 
     if (filtersState.buysell === 'sell') {
@@ -38,8 +38,8 @@ export const FilterOption = (filtersState,ads) => {
 };
 
 
-export const  findHighestPrice= (ads)=>{
+export const findHighestPrice = (ads) => {
     return ads.reduce((maxPrice, ad) => {
         return ad.price > maxPrice ? ad.price : maxPrice;
     }, 0);
-}
+};

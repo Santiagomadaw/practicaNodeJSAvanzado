@@ -20,8 +20,6 @@ const Noad = () => {
 };
 export default Noad;
 
-
-
 const StyledNoad = styled.div`
     display: flex;
     flex-direction: column;

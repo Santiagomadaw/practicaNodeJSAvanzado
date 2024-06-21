@@ -15,9 +15,9 @@ export const getSlider = state => state.slider;
 
 
 
-export const getError =state => state.ui.error
+export const getError = state => state.ui.error;
 
-export const getPending =state => state.ui.pending
+export const getPending = state => state.ui.pending;
 
 
 export const getTagsLoaded = state => state.tags.data;

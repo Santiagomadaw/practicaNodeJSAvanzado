@@ -7,20 +7,19 @@ import configureStore from './store';
 import { Provider } from 'react-redux';
 import React from 'react';
 
-
 const accessToken = localStorage.getItem('auth');
 if (accessToken) {
     setAuthorizationHeader(accessToken);
 }
-const router = createBrowserRouter([{ path: '*', element: <App />}]);
+const router = createBrowserRouter([{ path: '*', element: <App /> }]);
 
-const store = configureStore({ auth: !!accessToken}, {router});
+const store = configureStore({ auth: !!accessToken }, { router });
 const root = createRoot(document.getElementById('root'));
 
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <RouterProvider router = {router}/>
+            <RouterProvider router={router} />
         </Provider>
     </React.StrictMode>
 );
