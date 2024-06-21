@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewAdvertPage Snapshot 1`] = `
+<div>
+  <section
+    class="new-ad-contianer"
+  >
+    <form
+      class="sc-gEvDqW khRgaH"
+      id="ad-form"
+    >
+      <label
+        for="name"
+      >
+        <h4>
+          Articulo:
+        </h4>
+      </label>
+      <input
+        class="sc-fqkwJk fpgxDN"
+        id="name"
+        name="name"
+        required=""
+        role="name"
+        type="text"
+      />
+      <label
+        for="price"
+      >
+        <h4>
+          Price:
+        </h4>
+      </label>
+      <input
+        class="sc-fqkwJk fpgxDN"
+        id="price"
+        name="price"
+        required=""
+        role="price"
+        step="0.01"
+        type="number"
+      />
+      <label
+        for="tags"
+      >
+        <h4>
+          Etiquetas:
+        </h4>
+      </label>
+      <select
+        class="sc-eqUzNf fCwalN"
+        id="tags"
+        multiple=""
+        name="tags"
+        required=""
+        role="tags"
+      >
+        <option
+          id="lifestyle"
+          value="lifestyle"
+        >
+          lifestyle
+        </option>
+        <option
+          id="mobile"
+          value="mobile"
+        >
+          mobile
+        </option>
+        <option
+          id="motor"
+          value="motor"
+        >
+          motor
+        </option>
+        <option
+          id="work"
+          value="work"
+        >
+          work
+        </option>
+      </select>
+      <label
+        for="photo"
+      >
+        <h4>
+          Foto:
+        </h4>
+      </label>
+      <input
+        accept="image/png, image/jpeg"
+        id="photo"
+        name="photo"
+        type="file"
+      />
+      <div
+        class="sc-kAycRU eoeDLX switch-container"
+      >
+        <h3
+          class="switchtext"
+        >
+          Compra
+        </h3>
+        <label
+          class="switch"
+        >
+          <input
+            id="buysellcheck"
+            name="sale"
+            type="checkbox"
+          />
+          <span
+            class="slider round"
+          />
+        </label>
+        <h3
+          class="switchtext"
+        >
+          Venta
+        </h3>
+      </div>
+      <div
+        class="buttonWrapper"
+      >
+        <button
+          class="sc-aYaIB hmzVox backButton"
+          role="buttonBack"
+          type="button"
+        >
+          Volver
+        </button>
+        <button
+          class="sc-aYaIB hmzVox newAdButton"
+          disabled=""
+          role="buttonSubmit"
+          type="submit"
+        >
+          Crear anuncio
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+`;
