@@ -125,3 +125,45 @@ describe('authLogout action', () => {
   });
   jest.resetAllMocks();
 });
+
+describe('adCreate action', () => {
+  const formValues = 'formValues';
+  const action = adCreate(formValues);
+  const redirectUrl = '/adverts/123';
+  const dispatch = jest.fn();
+  const services = { postAd: {} };
+  const router = {
+    state: { location: { state: { from: redirectUrl } } },
+    navigate: jest.fn(),
+  };
+
+  test('adCreate Succesfull', async () => {
+
+    services.postAd = jest.fn().mockResolvedValue({ data: { id: '123' } });
+    await action(dispatch, undefined, { services, router });
+
+    expect(dispatch).toHaveBeenCalledTimes(3);
+    expect(dispatch).toHaveBeenNthCalledWith(1, adCreatedPending());
+    expect(services.postAd).toHaveBeenCalledWith(formValues);
+    expect(dispatch).toHaveBeenNthCalledWith(2, adCreatedFulfilled({ id: '123' }));
+
+    expect(router.navigate).toHaveBeenCalledWith(redirectUrl, {
+      replace: true,
+    });
+    jest.resetAllMocks()
+  });
+
+  test('adCreate ReJected', async () => {
+    const error = new Error('unauthorized');
+    services.postAd = jest.fn().mockRejectedValue(error);
+
+    await action(dispatch, undefined, { services, router });
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).toHaveBeenNthCalledWith(1, adCreatedPending());
+    expect(services.postAd).toHaveBeenCalledWith(formValues);
+    expect(dispatch).toHaveBeenNthCalledWith(2, adCreatedRejected(error));
+    expect(router.navigate).not.toHaveBeenCalled();
+
+  });
+  jest.resetAllMocks()
+});

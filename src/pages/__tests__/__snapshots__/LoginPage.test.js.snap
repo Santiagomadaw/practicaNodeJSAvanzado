@@ -53,7 +53,7 @@ exports[`LoginPage Snap shot 1`] = `
         </h3>
       </div>
       <button
-        class="sc-dcJtft ggeaVg loginButton"
+        class="sc-dcJtft fYHXFw loginButton"
         disabled=""
         role="button"
         type="submit"

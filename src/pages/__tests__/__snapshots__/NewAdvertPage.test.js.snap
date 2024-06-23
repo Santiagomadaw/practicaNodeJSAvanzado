@@ -123,14 +123,14 @@ exports[`NewAdvertPage Snapshot 1`] = `
         class="buttonWrapper"
       >
         <button
-          class="sc-aYaIB hmzVox backButton"
+          class="sc-aYaIB cnpRAN backButton"
           role="buttonBack"
           type="button"
         >
           Volver
         </button>
         <button
-          class="sc-aYaIB hmzVox newAdButton"
+          class="sc-aYaIB cnpRAN newAdButton"
           disabled=""
           role="buttonSubmit"
           type="submit"

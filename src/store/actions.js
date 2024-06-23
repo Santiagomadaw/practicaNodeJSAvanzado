@@ -156,14 +156,13 @@ export const adCreate = (formValues) => async (dispatch, _getState, { services: 
         dispatch(adCreatedPending());
         const response = await postAd(formValues);
 
-        dispatch(adCreatedFulfilled(response.data));
+        await dispatch(adCreatedFulfilled(response.data));
 
         dispatch(setSlider());
-        setTimeout(() => {
+        
 
             const to = `/adverts/${response.data.id}`;
             router.navigate(to, { replace: true });
-        }, 1000);
 
 
     } catch (error) {
